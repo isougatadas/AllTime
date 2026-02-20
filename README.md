@@ -12,7 +12,7 @@ Works completely **offline** · No account required · No data collected.
    - **Edge** → `edge://extensions`
 2. Turn on **Developer mode** (top-right toggle)
 3. Click **Load unpacked**
-4. Select the `/AllTime Clock' folder
+4. Select the `.../AllTime Clock` folder
 5. Pin the extension to your toolbar and click it to open
 
 ---
@@ -62,4 +62,5 @@ Click the moon/sun icon in the top-right header to switch themes.
 ---
 
 *AllTime v1.0 — Offline · Private · No permissions required*
+
 
