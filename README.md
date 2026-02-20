@@ -1,66 +1,126 @@
-# AllTime — World Clock Extension
+# 🌍 AllTime Clock
 
-View live time across multiple countries, all in one place.  
-Works completely **offline** · No account required · No data collected.
+A lightweight, offline-first Chrome / Microsoft Edge extension designed for professionals managing global time zones.
 
----
+AllTime Clock functions as a compact world-time meeting planner directly in your browser.
 
-## Install
-
-1. Open your browser and go to:
-   - **Chrome** → `chrome://extensions`
-   - **Edge** → `edge://extensions`
-2. Turn on **Developer mode** (top-right toggle)
-3. Click **Load unpacked**
-4. Select the `.../AllTime Clock` folder
-5. Pin the extension to your toolbar and click it to open
+No backend.  
+No login.  
+No data tracking.  
+Fully client-side.
 
 ---
 
-## How to Use
+## 🚀 What It Does
 
-### Add a country
-Type a country or city name in the search bar at the top. Click a result to add it as a clock card.
+AllTime Clock allows you to:
 
-### Remove a country
-Hover over a card — a small **✕** button appears in the top-right corner. Click it to remove.
+- 🌎 Add and manage multiple global business hubs  
+- 🕒 View live local time (updates every second)  
+- 🔁 Convert time instantly between countries  
+- ✏️ Edit time in any country and auto-sync all others  
+- 📅 Plan international meetings efficiently  
+- 🌗 Switch between Light and Dark mode  
 
-### Reorder cards
-Hover over a card to reveal the drag handle on the left. Drag cards up or down to reorder.
-
-### Set a custom time
-Click directly on the time digits of any card to type a new time.  
-All other clocks update instantly to match. A **"Simulation Active"** banner appears at the top — click **Reset** to return to live time.
-
-### 12h / 24h format
-Click the **24H / 12H** button in the top-right header to toggle between formats.
-
-### Dark / Light mode
-Click the moon/sun icon in the top-right header to switch themes.
+Built using native `Intl.DateTimeFormat` for accurate timezone handling and automatic daylight saving adjustments.
 
 ---
 
-## What Each Card Shows
+## 🧩 Core Features
 
-| Element | Meaning |
-|---|---|
-| Country code (e.g. `IN`, `GB`) | Country identifier |
-| Bold time | Current local time in that timezone |
-| `:seconds` | Live second counter |
-| `GMT+5:30` / `EST` | Timezone abbreviation |
-| `−5h 30m` / `+7h` | Time difference from **your** local time |
-| ☀️ / 🌙 | Day (6 AM–6 PM) or Night in that timezone |
+### 🌎 Multi-Country Live Clock
+- Searchable dropdown country selection  
+- Displays country, city, current time, timezone abbreviation  
+- Shows relative time difference (e.g., +4.5 hrs)  
+- Optional drag-to-reorder country cards  
+
+### 📅 Meeting Planner Mode
+- Select a base country  
+- Enter date and time (HH:MM)  
+- Automatically recalculates all selected regions  
+- No page reload required  
+
+### ✏️ Smart Time Editing
+- Click any clock to edit time manually  
+- Recalculates all other countries instantly  
+- Perfect for quick scheduling scenarios  
 
 ---
 
-## Tips
+## 🛠 Technical Overview
 
-- Your **local time card** is always pinned at the top and cannot be removed
-- The extension remembers your selected countries, theme, and format between sessions
-- All time calculations handle daylight saving time automatically
+- Manifest V3 compliant  
+- Chrome & Edge compatible  
+- Fully offline after installation  
+- Uses `chrome.storage.local` for settings persistence  
+- Minimal permission required: `storage`  
+- No external APIs or heavy libraries  
 
 ---
 
-*AllTime v1.0 — Offline · Private · No permissions required*
+## 🌍 Included Global Business Hubs
 
+Supports 30+ major locations, including:
 
+India (Asia/Kolkata)  
+USA (New York, Los Angeles)  
+UK (Europe/London)  
+Germany (Europe/Berlin)  
+UAE (Asia/Dubai)  
+Singapore (Asia/Singapore)  
+Australia (Sydney)  
+Japan (Asia/Tokyo)  
+Canada (Toronto)  
+Brazil (São Paulo)  
+
+Additional countries can be added inside `popup.js` by appending:
+
+{
+  label: "Country (City)",
+  timezone: "Region/City"
+}
+
+---
+
+## ⚡ Performance Goals
+
+- Popup loads under 1 second  
+- Zero network requests  
+- Deterministic time calculations  
+- Lightweight and modular code  
+- No backend, ever  
+
+---
+
+## 📦 Installation (Unpacked)
+
+1. Open browser Extensions page  
+2. Enable Developer Mode  
+3. Click “Load Unpacked”  
+4. Select the AllTime Clock folder  
+5. Pin to toolbar  
+
+---
+
+## 🎯 Designed For
+
+- Global consulting teams  
+- Cross-border operations  
+- Recruiters scheduling internationally  
+- Traders monitoring markets  
+- Distributed leadership teams  
+
+---
+
+## 🔒 Privacy & Constraints
+
+- No data collection  
+- No analytics  
+- No external communication  
+- Fully local execution  
+- Clean, maintainable code  
+
+---
+
+### 🌍 AllTime Clock  
+Lightweight. Precise. Built for global professionals.
