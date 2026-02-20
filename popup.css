@@ -1,0 +1,1084 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   AllTime — popup.css
+   Black & White premium theme with dark/light mode support
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Google Font ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─── CSS Custom Properties ────────────────────────────────────────────────── */
+:root {
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Dark Theme (default) ──────────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-card: #141414;
+  --bg-card-hover: #1a1a1a;
+  --bg-elevated: #1e1e1e;
+  --bg-input: #161616;
+  --bg-dropdown: #181818;
+
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-light: rgba(255, 255, 255, 0.10);
+  --border-medium: rgba(255, 255, 255, 0.15);
+
+  --text-primary: #f0f0f0;
+  --text-secondary: #a0a0a0;
+  --text-muted: #606060;
+  --text-accent: #ffffff;
+
+  --accent: #ffffff;
+  --accent-dim: rgba(255, 255, 255, 0.12);
+  --accent-glow: rgba(255, 255, 255, 0.04);
+
+  --business-bg: rgba(255, 255, 255, 0.06);
+  --business-border: rgba(255, 255, 255, 0.20);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.7);
+
+  --scrollbar-track: #111111;
+  --scrollbar-thumb: #2a2a2a;
+}
+
+/* ─── Light Theme ────────────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg-primary: #f5f5f5;
+  --bg-secondary: #ebebeb;
+  --bg-card: #ffffff;
+  --bg-card-hover: #fafafa;
+  --bg-elevated: #ffffff;
+  --bg-input: #ffffff;
+  --bg-dropdown: #ffffff;
+
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-light: rgba(0, 0, 0, 0.10);
+  --border-medium: rgba(0, 0, 0, 0.16);
+
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --text-muted: #999999;
+  --text-accent: #000000;
+
+  --accent: #000000;
+  --accent-dim: rgba(0, 0, 0, 0.08);
+  --accent-glow: rgba(0, 0, 0, 0.03);
+
+  --business-bg: rgba(0, 0, 0, 0.04);
+  --business-border: rgba(0, 0, 0, 0.18);
+
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.10);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.14);
+
+  --scrollbar-track: #ebebeb;
+  --scrollbar-thumb: #cccccc;
+}
+
+/* ─── Reset & Base ─────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  width: 460px;
+  min-width: 400px;
+  max-width: 520px;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 200px;
+  max-height: 600px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: background var(--transition-slow), color var(--transition-slow);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+/* ─── Typography ─────────────────────────────────────────────────────────── */
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .logo-icon {
+  filter: brightness(0) invert(1);
+}
+
+.logo-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+}
+
+.logo-accent {
+  color: var(--text-secondary);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ─── Icon Button ────────────────────────────────────────────────────────── */
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+  font-size: 13px;
+}
+
+.icon-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-btn:hover {
+  background: var(--accent-dim);
+  color: var(--text-primary);
+}
+
+.icon-btn.active {
+  background: var(--accent-dim);
+  color: var(--text-accent);
+}
+
+/* ─── Add Country Bar ───────────────────────────────────────────────────── */
+.add-bar {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  background: var(--bg-secondary);
+}
+
+.search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 0 12px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.search-wrap:focus-within {
+  border-color: var(--border-medium);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.search-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+#country-search {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 13px;
+  padding: 9px 0;
+}
+
+#country-search::placeholder {
+  color: var(--text-muted);
+}
+
+.search-clear {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color var(--transition);
+}
+
+.search-clear:hover {
+  color: var(--text-primary);
+}
+
+/* ─── Dropdown ────────────────────────────────────────────────────────────── */
+.dropdown {
+  position: absolute;
+  top: calc(100% - 4px);
+  left: 16px;
+  right: 16px;
+  background: var(--bg-dropdown);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 999;
+  display: none;
+}
+
+.dropdown.open {
+  display: block;
+  animation: dropIn 0.15s ease;
+}
+
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  cursor: pointer;
+  transition: background var(--transition);
+  font-size: 13px;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: var(--accent-dim);
+}
+
+.dropdown-item .di-flag-img {
+  width: 18px;
+  height: auto;
+  border-radius: 1px;
+  margin-right: 2px;
+  opacity: 0.9;
+}
+
+.dropdown-item .di-code {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  background: var(--accent-dim);
+  border-radius: 4px;
+  padding: 2px 6px;
+  min-width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.dropdown-item .di-label {
+  font-weight: 500;
+}
+
+.dropdown-item .di-city {
+  color: var(--text-muted);
+  font-size: 11px;
+  margin-left: auto;
+}
+
+.dropdown-empty {
+  padding: 16px 12px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* ─── Clock Grid ─────────────────────────────────────────────────────────── */
+.clock-grid {
+  padding: 12px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ─── Empty State ────────────────────────────────────────────────────────── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  gap: 8px;
+}
+
+.empty-icon {
+  font-size: 36px;
+  opacity: 0.5;
+}
+
+.empty-state p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.empty-state small {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ─── Clock Card ─────────────────────────────────────────────────────────── */
+.clock-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+  position: relative;
+  user-select: none;
+}
+
+.clock-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.clock-card:active {
+  transform: translateY(0);
+}
+
+/* Left accent line on every card */
+.clock-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  opacity: 0.2;
+}
+
+/* Business hours: same accent line, no change */
+
+/* Simulated clock / base country */
+.clock-card.is-base {
+  border-color: var(--border-medium);
+}
+
+.clock-card.is-base::after {
+  content: 'BASE';
+  position: absolute;
+  top: 10px;
+  right: 40px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  background: var(--accent-dim);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Flag zone — container for flag and code */
+.card-flag-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  min-width: 44px;
+  flex-shrink: 0;
+  gap: 4px;
+}
+
+.card-flag-img {
+  width: 28px;
+  height: auto;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  /* subtle edge for light flags */
+}
+
+.card-flag-emoji {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.card-flag-code {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+/* Time zone */
+.card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-label {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.card-country {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-city {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.card-time {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.card-time .seconds {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 3px;
+}
+
+.card-date {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.card-tz {
+  font-size: 12px;
+  color: var(--text-primary);
+  background: var(--accent-dim);
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Time diff badge */
+.card-diff {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+  background: var(--accent-dim);
+  border: 1px solid var(--border-light);
+  padding: 2px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+}
+
+.card-diff.diff-zero {
+  color: var(--text-muted);
+}
+
+/* Day-part emoji — direct flex child of card, always vertically centred */
+.card-daypart {
+  font-size: 18px;
+  line-height: 1;
+  opacity: 0.85;
+  cursor: default;
+  user-select: none;
+  flex-shrink: 0;
+  margin-left: 4px;
+}
+
+/* Card actions — absolute so they don't affect flex layout */
+.card-actions {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.clock-card:hover .card-actions {
+  opacity: 1;
+}
+
+.card-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.card-btn svg {
+  width: 12px;
+  height: 12px;
+}
+
+.card-btn:hover {
+  background: var(--accent-dim);
+  color: var(--text-primary);
+}
+
+.card-btn.danger:hover {
+  background: rgba(255, 80, 80, 0.12);
+  color: #ff5050;
+}
+
+/* Edit pencil overlay */
+.card-edit-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 9px;
+  color: var(--text-muted);
+  opacity: 0;
+  transition: opacity var(--transition);
+  pointer-events: none;
+}
+
+.clock-card:hover .card-edit-hint {
+  opacity: 1;
+}
+
+/* ─── Local Time Card ──────────────────────────────────────────────────────── */
+.clock-card.local-card {
+  cursor: default;
+}
+
+
+
+/* ─── Inline Time Input ─────────────────────────────────────────────────────── */
+.inline-time-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--border-medium);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  outline: none;
+  width: auto;
+  min-width: 100px;
+  max-width: 140px;
+  padding: 0 0 2px;
+  cursor: text;
+  transition: border-color var(--transition);
+}
+
+.inline-time-input:focus {
+  border-bottom-color: var(--text-primary);
+}
+
+/* ─── AM/PM Label ────────────────────────────────────────────────────────────── */
+.card-ampm {
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-left: 4px;
+  vertical-align: super;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Hour Format Button ─────────────────────────────────────────────────────── */
+.hour-fmt-btn {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  width: 36px;
+  color: var(--text-secondary);
+}
+
+.hour-fmt-btn:hover {
+  color: var(--text-primary);
+}
+
+/* Clickable cursor on card time */
+.card-time {
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background var(--transition);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  padding: 2px 4px;
+  margin: -2px -4px;
+}
+
+.clock-card:hover .card-time:not(:has(.inline-time-input)):hover {
+  background: var(--accent-dim);
+}
+
+/* ─── Modal Overlay ────────────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 420px;
+  max-height: 520px;
+  overflow-y: auto;
+  animation: slideUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-sm {
+  max-width: 340px;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.modal-header h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.modal-body {
+  padding: 16px 18px;
+}
+
+/* ─── Meeting Form ────────────────────────────────────────────────────────── */
+.meeting-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-row label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.form-row select,
+.form-row input[type="date"],
+.form-row input[type="time"],
+.form-row input[type="datetime-local"] {
+  background: var(--bg-input);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 9px 11px;
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 13px;
+  outline: none;
+  width: 100%;
+  transition: border-color var(--transition);
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.form-row select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+
+.form-row select:focus,
+.form-row input:focus {
+  border-color: var(--border-medium);
+}
+
+/* ─── Meeting Results ─────────────────────────────────────────────────────── */
+.mp-results {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mp-result-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  transition: background var(--transition);
+}
+
+.mp-result-row:hover {
+  background: var(--bg-card-hover);
+}
+
+.mp-flag {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.mp-country {
+  font-weight: 500;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mp-time {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.mp-date-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.mp-empty {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* ─── Meeting Actions ─────────────────────────────────────────────────────── */
+.meeting-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+/* ─── Action Buttons ─────────────────────────────────────────────────────── */
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 1;
+  padding: 9px 14px;
+  border: 1px solid var(--border-medium);
+  background: transparent;
+  color: var(--text-primary);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.action-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.action-btn:hover {
+  background: var(--accent);
+  color: var(--bg-primary);
+  border-color: var(--accent);
+}
+
+.action-btn.secondary {
+  color: var(--text-secondary);
+  border-color: var(--border-subtle);
+}
+
+.action-btn.secondary:hover {
+  background: var(--accent-dim);
+  color: var(--text-primary);
+  border-color: var(--border-light);
+}
+
+/* ─── Edit Hint ──────────────────────────────────────────────────────────── */
+.edit-hint {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.edit-hint strong {
+  color: var(--text-primary);
+}
+
+/* ─── Modal Footer ───────────────────────────────────────────────────────── */
+.modal-footer {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  justify-content: flex-end;
+}
+
+/* ─── Toast ──────────────────────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 9px 18px;
+  border-radius: 100px;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  white-space: nowrap;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ─── Drag Handle ──────────────────────────────────────────────────────────── */
+.drag-handle {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5px;
+  padding: 4px 3px;
+  cursor: grab;
+  opacity: 0;
+  transition: opacity var(--transition);
+  flex-shrink: 0;
+}
+
+/* Invisible spacer — same size as drag-handle — keeps local card aligned */
+.drag-placeholder {
+  width: 20px;
+  flex-shrink: 0;
+}
+
+/* "Local" badge shown inline after city name in the local card */
+.local-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--accent-dim);
+  border-radius: 4px;
+  padding: 1px 5px;
+  vertical-align: middle;
+  margin-left: 3px;
+}
+
+.drag-handle span {
+  display: block;
+  width: 14px;
+  height: 1.5px;
+  background: var(--text-muted);
+  border-radius: 2px;
+}
+
+.clock-card:hover .drag-handle {
+  opacity: 1;
+}
+
+.clock-card.dragging {
+  opacity: 0.4;
+  cursor: grabbing;
+}
+
+.clock-card.drag-over {
+  border-color: var(--border-medium);
+  background: var(--bg-card-hover);
+}
+
+/* ─── Simulated Mode Banner ──────────────────────────────────────────────── */
+.sim-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: var(--accent-dim);
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+.sim-banner strong {
+  color: var(--text-primary);
+}
+
+.sim-reset-btn {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.sim-reset-btn:hover {
+  background: var(--accent-dim);
+}
+
+/* ─── Utility ────────────────────────────────────────────────────────────── */
+.hidden {
+  display: none !important;
+}

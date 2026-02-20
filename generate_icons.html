@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>WorldSync Clock — Icon Generator</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #111;
+            color: #eee;
+            padding: 24px;
+        }
+
+        canvas {
+            border: 1px solid #333;
+            margin: 8px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 12px 0;
+        }
+
+        button {
+            background: #222;
+            color: #eee;
+            border: 1px solid #444;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        button:hover {
+            background: #333;
+        }
+
+        a {
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>WorldSync Clock Icon Generator</h2>
+    <p>Click each "Save" button to download the icon as a PNG, then place it in the <code>icons/</code> folder.</p>
+
+    <div class="row">
+        <canvas id="c16" width="16" height="16"></canvas>
+        <span>16×16</span>
+        <button onclick="save('c16','icon16.png')">Save icon16.png</button>
+    </div>
+    <div class="row">
+        <canvas id="c48" width="48" height="48"></canvas>
+        <span>48×48</span>
+        <button onclick="save('c48','icon48.png')">Save icon48.png</button>
+    </div>
+    <div class="row">
+        <canvas id="c128" width="128" height="128"></canvas>
+        <span>128×128</span>
+        <button onclick="save('c128','icon128.png')">Save icon128.png</button>
+    </div>
+
+    <script>
+        function drawIcon(canvas) {
+            const size = canvas.width;
+            const ctx = canvas.getContext("2d");
+            const cx = size / 2, cy = size / 2;
+            const R = size * 0.42;
+            const pad = size * 0.05;
+
+            // Background
+            ctx.fillStyle = "#0a0a0a";
+            roundRect(ctx, 0, 0, size, size, size * 0.18);
+            ctx.fill();
+
+            // Globe circle
+            ctx.strokeStyle = "#ffffff";
+            ctx.lineWidth = size * 0.065;
+            ctx.beginPath();
+            ctx.arc(cx, cy, R, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Equator line
+            ctx.lineWidth = size * 0.048;
+            ctx.beginPath();
+            ctx.moveTo(cx - R - 1, cy);
+            ctx.lineTo(cx + R + 1, cy);
+            ctx.stroke();
+
+            // Meridian (vertical ellipse)
+            ctx.beginPath();
+            ctx.ellipse(cx, cy, R * 0.42, R, 0, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Clock hands (small inner clock overlay)
+            const clockR = R * 0.28;
+            // Hour hand — angled at ~10 o'clock
+            const hourAngle = -Math.PI / 2 - Math.PI / 6; // 10 o'clock
+            ctx.lineWidth = size * 0.07;
+            ctx.lineCap = "round";
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(cx + Math.cos(hourAngle) * clockR * 0.65, cy + Math.sin(hourAngle) * clockR * 0.65);
+            ctx.stroke();
+
+            // Minute hand — angled at ~2 o'clock
+            const minAngle = -Math.PI / 2 + Math.PI / 3;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(cx + Math.cos(minAngle) * clockR, cy + Math.sin(minAngle) * clockR);
+            ctx.stroke();
+
+            // Center dot
+            ctx.beginPath();
+            ctx.arc(cx, cy, size * 0.045, 0, Math.PI * 2);
+            ctx.fillStyle = "#ffffff";
+            ctx.fill();
+        }
+
+        function roundRect(ctx, x, y, w, h, r) {
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.lineTo(x + w - r, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+            ctx.lineTo(x + w, y + h - r);
+            ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+            ctx.lineTo(x + r, y + h);
+            ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+            ctx.lineTo(x, y + r);
+            ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.closePath();
+        }
+
+        function save(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            const a = document.createElement("a");
+            a.download = filename;
+            a.href = canvas.toDataURL("image/png");
+            a.click();
+        }
+
+        // Draw all icons
+        ["c16", "c48", "c128"].forEach(id => drawIcon(document.getElementById(id)));
+    </script>
+</body>
+
+</html>

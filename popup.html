@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AllTime</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════ HEADER ═══════════════════════════════ -->
+  <header class="header">
+    <div class="header-left">
+      <img src="icons/icon48.png" class="logo-icon" alt="AllTime" />
+      <h1 class="logo-text">All<span class="logo-accent">Time</span></h1>
+    </div>
+    <div class="header-right">
+      <button id="btn-hour-format" class="icon-btn hour-fmt-btn" title="Toggle 12/24h format">
+        <span id="hour-format-label">12H</span>
+      </button>
+      <button id="btn-theme" class="icon-btn" title="Toggle Theme">
+        <svg id="icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" />
+        </svg>
+        <svg id="icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          style="display:none">
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════ ADD COUNTRY BAR ═══════════════════════════ -->
+  <div class="add-bar">
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+      <input id="country-search" type="text" placeholder="Add a country or city..." autocomplete="off"
+        spellcheck="false" />
+      <button id="search-clear" class="search-clear" style="display:none">✕</button>
+    </div>
+    <div id="dropdown" class="dropdown" role="listbox" aria-label="Country options"></div>
+  </div>
+
+  <!-- ════════════════════════════ CLOCK CARDS ═══════════════════════════════ -->
+  <main id="clock-grid" class="clock-grid">
+    <!-- Cards injected by JS -->
+    <div class="empty-state" id="empty-state">
+      <span class="empty-icon">🌍</span>
+      <p>Add a country to get started</p>
+      <small>Search above to add your first clock</small>
+    </div>
+  </main>
+
+
+  <!-- ════════════════════════════ TOAST ══════════════════════════════════════ -->
+  <div id="toast" class="toast" role="alert" aria-live="polite"></div>
+
+  <script src="countries.js"></script>
+  <script src="popup.js"></script>
+</body>
+
+</html>
